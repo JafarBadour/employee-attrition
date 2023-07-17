@@ -1,0 +1,47 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+
+ 
+  name: grafana
+
+spec:
+
+  replicas: 1
+  selector:
+    matchLabels:
+      name: grafana-elb
+  template:
+    metadata:
+      labels:
+        name: grafana-elb
+    spec:
+      automountServiceAccountToken: true
+      containers:
+        - name: grafana-app
+          env:
+          - name: name
+            value: grafana
+          image: 466956024587.dkr.ecr.eu-west-2.amazonaws.com/attrition-repo:grafana
+          command: 
+          imagePullPolicy: Always
+          
+          ports:
+          - containerPort: 3000
+            name: grafana
+            protocol: TCP
+
+          
+      restartPolicy: Always
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node.kubernetes.io/instance-type
+                operator: In
+                values:
+                  - c5.4xlarge
+                  - t3.medium
+
