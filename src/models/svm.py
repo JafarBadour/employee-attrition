@@ -39,6 +39,6 @@ class SVMFlow(mlflow.pyfunc.PythonModel):
         X.to_csv(f"./{datetime.utcnow().strftime('%Y-%m-%dT%H-%M-%S.%s')}.csv")
         return pred
     def save_model(self, path="./src/data/SVCmodel"):
-        mlflow.sklearn.save_model(model, path)
+        mlflow.sklearn.save_model(self._svc, path)
 
 
