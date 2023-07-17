@@ -20,7 +20,6 @@ One needs to install following version of awscli and kubectl as well as terrafor
 
 | tool | version |  
 | terraform | v1.4.2 |  
-|---|---|---|---|---|
 | aws | aws-cli/2.13.1 |  
 | kubectl | v5.0.1 |
 
